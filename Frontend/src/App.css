@@ -1,0 +1,2635 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #05030b;
+  color: #f5f3ff;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(124, 58, 237, 0.20),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(109, 40, 217, 0.08),
+      transparent 30%
+    ),
+    #05030b;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  height: 72px;
+
+  background: rgba(5, 3, 11, 0.86);
+
+  backdrop-filter: blur(18px);
+
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.16);
+}
+
+.navbar-container {
+  width: min(1120px, calc(100% - 48px));
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #f5f3ff;
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.7px;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a855f7,
+      #6d28d9
+    );
+
+  box-shadow:
+    0 0 25px rgba(139, 92, 246, 0.38);
+
+  font-size: 19px;
+}
+
+.logo-highlight {
+  color: #a78bfa;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+
+  gap: 38px;
+}
+
+.nav-links a {
+  position: relative;
+
+  color: #9690a7;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  transition: 0.25s;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.nav-links a:first-child {
+  color: #f5f3ff;
+}
+
+.nav-links a:first-child::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: -9px;
+
+  height: 2px;
+
+  border-radius: 10px;
+
+  background: #8b5cf6;
+
+  box-shadow:
+    0 0 10px rgba(139, 92, 246, 0.8);
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-button {
+  padding: 10px 20px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.55);
+
+  background:
+    rgba(124, 58, 237, 0.08);
+
+  color: #c4b5fd;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: 0.25s;
+}
+
+.login-button:hover {
+  background: #7c3aed;
+
+  color: white;
+
+  box-shadow:
+    0 0 25px rgba(124, 58, 237, 0.35);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+  width: min(1120px, calc(100% - 48px));
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-section {
+  position: relative;
+
+  margin-top: 28px;
+
+  min-height: 300px;
+
+  padding: 45px 50px;
+
+  border-radius: 18px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.23);
+
+  background:
+    radial-gradient(
+      circle at 78% 45%,
+      rgba(124, 58, 237, 0.20),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #110a20,
+      #08050f 70%
+    );
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.03),
+    0 25px 70px rgba(0,0,0,0.32);
+}
+
+
+/* HERO GLOW */
+
+.hero-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  right: 80px;
+  top: -110px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(139, 92, 246, 0.13);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* HERO CONTENT */
+
+.hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 620px;
+}
+
+
+/* =========================================================
+   HERO TAG
+========================================================= */
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0 0 18px;
+
+  padding: 7px 13px;
+
+  border-radius: 30px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.32);
+
+  background:
+    rgba(124, 58, 237, 0.08);
+
+  color: #a78bfa;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.6px;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero-content h1 {
+  margin: 0;
+
+  font-size: clamp(44px, 5vw, 60px);
+
+  line-height: 1.02;
+
+  letter-spacing: -2.8px;
+
+  color: #f8f7ff;
+
+  font-weight: 800;
+}
+
+.hero-content h1 span {
+  display: block;
+
+  margin-left: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #c4b5fd,
+      #8b5cf6,
+      #7c3aed
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.hero-description {
+  max-width: 560px;
+
+  margin: 18px 0 0;
+
+  color: #9891aa;
+
+  font-size: 15px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   EXPLORE BUTTON
+========================================================= */
+
+.explore-button {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 25px;
+
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 10px 25px rgba(109, 40, 217, 0.30);
+
+  transition: 0.25s;
+}
+
+.explore-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 35px rgba(109, 40, 217, 0.42);
+}
+
+
+/* =========================================================
+   MOVIES SECTION
+========================================================= */
+
+.movies-section {
+  padding: 45px 0 80px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+  display: flex;
+
+  align-items: end;
+
+  justify-content: space-between;
+
+  padding-bottom: 18px;
+
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.15);
+
+  margin-bottom: 18px;
+}
+
+.section-label {
+  margin: 0 0 7px;
+
+  color: #9b6cff;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #f5f3ff;
+
+  font-size: 27px;
+
+  letter-spacing: -0.8px;
+}
+
+.movie-count {
+  margin: 0;
+
+  color: #726b82;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   SEARCH / FILTER CONTROLS
+========================================================= */
+
+.movie-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 25px;
+
+  padding: 10px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  border-radius: 13px;
+
+  background:
+    rgba(14, 9, 24, 0.88);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.20);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box {
+  flex: 1;
+
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding-left: 13px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.18);
+
+  border-radius: 8px;
+
+  background: #08060e;
+
+  transition: 0.2s;
+}
+
+.search-box:focus-within {
+  border-color: #7c3aed;
+
+  box-shadow:
+    0 0 0 3px rgba(124,58,237,0.08);
+}
+
+.search-box span {
+  font-size: 15px;
+}
+
+.search-box input {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #f5f3ff;
+
+  font-size: 13px;
+}
+
+.search-box input::placeholder {
+  color: #625b70;
+}
+
+.search-box button {
+  height: 34px;
+
+  margin-right: 5px;
+
+  padding: 0 16px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  color: white;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+.search-box button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 15px rgba(124,58,237,0.35);
+}
+
+
+/* =========================================================
+   PRICE FILTER
+========================================================= */
+
+.price-filter {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.price-filter input {
+  width: 92px;
+
+  height: 42px;
+
+  padding: 0 10px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #08060e;
+
+  color: #f5f3ff;
+
+  font-size: 12px;
+}
+
+.price-filter input:focus {
+  border-color: #7c3aed;
+}
+
+.price-filter input::placeholder {
+  color: #625b70;
+}
+
+.price-filter span {
+  color: #625b70;
+}
+
+.price-filter button,
+.clear-button {
+  height: 42px;
+
+  padding: 0 15px;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+.price-filter button {
+  border:
+    1px solid #7c3aed;
+
+  background:
+    rgba(124,58,237,0.16);
+
+  color: #c4b5fd;
+}
+
+.price-filter button:hover {
+  background: #7c3aed;
+
+  color: white;
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+.clear-button {
+  border:
+    1px solid rgba(139,92,246,0.22);
+
+  background: transparent;
+
+  color: #9b94a8;
+}
+
+.clear-button:hover {
+  color: #c4b5fd;
+
+  border-color: #8b5cf6;
+
+  background:
+    rgba(124,58,237,0.06);
+}
+
+
+/* =========================================================
+   MOVIE LIST
+========================================================= */
+
+.movie-list {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   MOVIE CARD
+========================================================= */
+
+.movie-card {
+  position: relative;
+
+  overflow: hidden;
+
+  min-width: 0;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 14, 38, 0.98),
+      rgba(9, 7, 16, 0.98)
+    );
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,0.25);
+
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(139, 92, 246, 0.55);
+
+  box-shadow:
+    0 20px 45px rgba(76,29,149,0.20);
+}
+
+
+/* =========================================================
+   MOVIE POSTER
+========================================================= */
+
+.movie-poster {
+  height: 155px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(139,92,246,0.42),
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #251342,
+      #0d0916
+    );
+}
+
+.movie-poster::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(9,7,16,0.88),
+      transparent 60%
+    );
+}
+
+.poster-icon {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 48px;
+
+  filter:
+    drop-shadow(
+      0 10px 25px rgba(139,92,246,0.5)
+    );
+}
+
+.poster-overlay {
+  position: absolute;
+
+  z-index: 3;
+
+  top: 12px;
+
+  left: 12px;
+}
+
+.movie-badge {
+  display: inline-block;
+
+  padding: 5px 8px;
+
+  border-radius: 6px;
+
+  border:
+    1px solid rgba(139,92,246,0.35);
+
+  background:
+    rgba(15,8,30,0.82);
+
+  color: #c4b5fd;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.movie-content {
+  padding: 16px 17px 17px;
+}
+
+.movie-content h3 {
+  margin: 0 0 12px;
+
+  color: #f8f7ff;
+
+  font-size: 19px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.4px;
+}
+
+
+/* =========================================================
+   MOVIE INFO
+========================================================= */
+
+.movie-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.movie-info p {
+  margin: 0;
+
+  color: #8f879e;
+
+  font-size: 12px;
+}
+
+.movie-info span {
+  margin-right: 7px;
+
+  color: #a78bfa;
+}
+
+
+/* =========================================================
+   CARD BOTTOM
+========================================================= */
+
+.movie-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  padding-top: 13px;
+
+  border-top:
+    1px solid rgba(255,255,255,0.06);
+}
+
+.seats-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #665e70;
+
+  font-size: 8px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+.movie-bottom strong {
+  color: #a78bfa;
+
+  font-size: 15px;
+}
+
+.sold-out-text {
+  color: #ef4444 !important;
+}
+
+.price {
+  color: #f5f3ff;
+
+  font-size: 19px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   BOOK BUTTON
+========================================================= */
+
+.book-button {
+  width: 100%;
+
+  margin-top: 14px;
+
+  padding: 10px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  color: white;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+.book-button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px rgba(124,58,237,0.35);
+}
+
+.book-button span {
+  margin-left: 7px;
+}
+
+.book-button.disabled {
+  background: #25212c;
+
+  color: #625c6d;
+
+  cursor: not-allowed;
+}
+
+.book-button.disabled:hover {
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+  padding: 60px;
+
+  text-align: center;
+
+  color: #a78bfa;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   NO MOVIES
+========================================================= */
+
+.no-movies {
+  padding: 65px 20px;
+
+  text-align: center;
+
+  border:
+    1px dashed rgba(139,92,246,0.25);
+
+  border-radius: 15px;
+
+  background:
+    rgba(20,13,32,0.5);
+}
+
+.no-movies > div {
+  margin-bottom: 12px;
+
+  font-size: 40px;
+}
+
+.no-movies h3 {
+  margin: 0 0 8px;
+
+  color: #f5f3ff;
+}
+
+.no-movies p {
+  margin: 0;
+
+  color: #756e80;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .navbar-container,
+  main {
+    width: calc(100% - 36px);
+  }
+
+  .movie-list {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .movie-controls {
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .navbar {
+    height: 66px;
+  }
+
+  .navbar-container {
+    width: calc(100% - 28px);
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .login-button {
+    padding: 9px 15px;
+  }
+
+  main {
+    width: calc(100% - 28px);
+  }
+
+  .hero-section {
+    margin-top: 18px;
+
+    min-height: auto;
+
+    padding: 35px 25px;
+
+    border-radius: 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .movies-section {
+    padding-top: 38px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+  .section-heading h2 {
+    font-size: 25px;
+  }
+
+  .movie-list {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-controls {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 9px;
+  }
+
+  .search-box {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+  .price-filter {
+    width: 100%;
+
+    flex-wrap: wrap;
+  }
+
+  .price-filter input {
+    flex: 1;
+
+    min-width: 0;
+
+    width: auto;
+  }
+
+  .clear-button {
+    width: 100%;
+  }
+}
+
+.movie-poster-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.movie-poster {
+  height: 195px;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(139, 92, 246, 0.42),
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #251342,
+      #0d0916
+    );
+}
+
+.movie-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(9, 7, 16, 0.75),
+      transparent 60%
+    );
+
+  pointer-events: none;
+}
+
+.poster-overlay {
+  position: absolute;
+  z-index: 5;
+
+  top: 13px;
+  left: 13px;
+}
+
+.poster-icon {
+  position: absolute;
+  z-index: 3;
+
+  font-size: 52px;
+
+  filter:
+    drop-shadow(
+      0 10px 25px rgba(139, 92, 246, 0.5)
+    );
+}
+
+/* =========================================================
+   BOOKINGS PAGE
+========================================================= */
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  padding: 22px 24px;
+
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 14, 38, 0.98),
+      rgba(9, 7, 16, 0.98)
+    );
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.25);
+
+  transition: 0.2s;
+}
+
+.booking-item:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+
+  transform: translateY(-2px);
+}
+
+
+/* BOOKING NUMBER */
+
+.booking-number {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #8b5cf6;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* MOVIE NAME */
+
+.booking-info h2 {
+  margin: 0 0 12px;
+
+  color: #f5f3ff;
+
+  font-size: 22px;
+}
+
+
+/* DETAILS */
+
+.booking-info p {
+  margin: 6px 0;
+
+  color: #8f879e;
+
+  font-size: 13px;
+}
+
+
+/* RIGHT SIDE */
+
+.booking-right {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 8px;
+
+  min-width: 150px;
+}
+
+
+.booking-total-label {
+  color: #665e70;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.booking-right strong {
+  color: #c4b5fd;
+
+  font-size: 24px;
+
+  font-weight: 800;
+}
+
+
+/* CANCEL */
+
+.cancel-button {
+  margin-top: 6px;
+
+  padding: 9px 14px;
+
+  border: 1px solid rgba(239, 68, 68, 0.3);
+
+  border-radius: 8px;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  color: #f87171;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.cancel-button:hover {
+  background: rgba(239, 68, 68, 0.18);
+
+  border-color: rgba(239, 68, 68, 0.55);
+}
+
+
+/* BOOKING PAGE */
+
+.booking-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(124, 58, 237, 0.18),
+      transparent 40%
+    ),
+    #05030b;
+}
+
+
+.booking-card {
+  width: min(900px, 100%);
+
+  display: grid;
+
+  grid-template-columns: 320px 1fr;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(139, 92, 246, 0.25);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #160d27,
+      #090611
+    );
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+
+.booking-poster {
+  min-height: 450px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(139, 92, 246, 0.4),
+      transparent 55%
+    ),
+    #10091b;
+}
+
+
+.booking-poster img {
+  width: 100%;
+  height: 100%;
+
+  min-height: 450px;
+
+  object-fit: cover;
+}
+
+
+.booking-poster-placeholder {
+  font-size: 70px;
+}
+
+
+.booking-details {
+  padding: 40px;
+}
+
+
+.booking-details h1 {
+  margin: 8px 0 20px;
+
+  color: #f8f7ff;
+
+  font-size: 38px;
+
+  letter-spacing: -1.5px;
+}
+
+
+.booking-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-bottom: 28px;
+}
+
+
+.booking-info p {
+  margin: 0;
+
+  color: #91899f;
+
+  font-size: 14px;
+}
+
+
+/* SEAT SELECTOR */
+
+.seat-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px;
+
+  border: 1px solid rgba(139, 92, 246, 0.15);
+
+  border-radius: 12px;
+
+  background: rgba(10, 6, 18, 0.7);
+}
+
+
+.seat-selector label {
+  color: #b0a8bd;
+
+  font-size: 13px;
+}
+
+
+.seat-controls {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+}
+
+
+.seat-controls button {
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(139, 92, 246, 0.35);
+
+  border-radius: 8px;
+
+  background: rgba(124, 58, 237, 0.12);
+
+  color: #c4b5fd;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+
+.seat-controls button:hover {
+  background: #7c3aed;
+
+  color: white;
+}
+
+
+.seat-controls span {
+  min-width: 20px;
+
+  text-align: center;
+
+  color: #f5f3ff;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+/* TOTAL */
+
+.booking-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 20px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.booking-total span {
+  color: #777080;
+
+  font-size: 13px;
+}
+
+
+.booking-total strong {
+  color: #f5f3ff;
+
+  font-size: 26px;
+}
+
+
+/* BACK BUTTON */
+
+.back-button {
+  width: 100%;
+
+  margin-top: 10px;
+
+  padding: 11px;
+
+  border: 1px solid rgba(139, 92, 246, 0.2);
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #91899f;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.back-button:hover {
+  color: #c4b5fd;
+
+  border-color: #8b5cf6;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .booking-item {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .booking-right {
+    align-items: flex-start;
+  }
+
+  .booking-card {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-poster {
+    min-height: 280px;
+  }
+
+  .booking-poster img {
+    min-height: 280px;
+    max-height: 380px;
+  }
+
+  .booking-details {
+    padding: 25px;
+  }
+
+  .booking-details h1 {
+    font-size: 30px;
+  }
+
+  .seat-selector {
+    gap: 15px;
+  }
+}
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: calc(100vh - 76px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(124, 58, 237, 0.18),
+      transparent 40%
+    );
+}
+
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+
+  padding: 38px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.25);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25, 16, 42, 0.98),
+      rgba(9, 7, 16, 0.98)
+    );
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+
+/* LOGO */
+
+.login-logo {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-bottom: 28px;
+
+  color: #f5f3ff;
+
+  font-size: 22px;
+
+  font-weight: 800;
+}
+
+
+.login-logo .logo-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a855f7,
+      #6d28d9
+    );
+
+  color: white;
+}
+
+
+/* TITLE */
+
+.login-card h1 {
+  margin: 0;
+
+  text-align: center;
+
+  font-size: 30px;
+
+  letter-spacing: -1px;
+
+  color: #f8f7ff;
+}
+
+
+.login-subtitle {
+  margin: 10px 0 28px;
+
+  text-align: center;
+
+  color: #817995;
+
+  font-size: 14px;
+}
+
+
+/* ERROR */
+
+.login-error {
+  margin-bottom: 20px;
+
+  padding: 12px 14px;
+
+  border:
+    1px solid rgba(239, 68, 68, 0.35);
+
+  border-radius: 9px;
+
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  color: #f87171;
+
+  font-size: 13px;
+}
+
+
+/* FORM */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #c4b5fd;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+.form-group input {
+  width: 100%;
+
+  height: 46px;
+
+  padding: 0 14px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.2);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #08060e;
+
+  color: #f5f3ff;
+
+  font-size: 14px;
+}
+
+
+.form-group input::placeholder {
+  color: #625b70;
+}
+
+
+.form-group input:focus {
+  border-color: #7c3aed;
+
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.08);
+}
+
+
+/* SUBMIT */
+
+.login-submit {
+  width: 100%;
+
+  height: 46px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+
+.login-submit span {
+  margin-left: 8px;
+}
+
+
+.login-submit:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 25px rgba(124, 58, 237, 0.35);
+}
+
+
+.login-submit:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* BACK */
+
+.login-back {
+  width: 100%;
+
+  margin-top: 16px;
+
+  padding: 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #817995;
+
+  font-size: 13px;
+}
+
+
+.login-back:hover {
+  color: #c4b5fd;
+}
+
+/* =========================================================
+   BOOKINGS PAGE
+========================================================= */
+
+.bookings-page {
+  width: min(1100px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding: 70px 0 100px;
+
+  min-height: calc(100vh - 76px);
+}
+
+
+.bookings-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  padding-bottom: 25px;
+
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.18);
+
+  margin-bottom: 30px;
+}
+
+
+.bookings-header h1 {
+  margin: 0;
+
+  color: #f8f7ff;
+
+  font-size: 42px;
+
+  letter-spacing: -1.5px;
+}
+
+
+.bookings-subtitle {
+  margin: 10px 0 0;
+
+  color: #817995;
+
+  font-size: 14px;
+}
+
+
+.booking-back-top {
+  padding: 11px 18px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.3);
+
+  border-radius: 9px;
+
+  background:
+    rgba(124, 58, 237, 0.08);
+
+  color: #c4b5fd;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+
+.booking-back-top:hover {
+  background: #7c3aed;
+
+  color: white;
+}
+
+
+/* BOOKING LIST */
+
+.booking-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+
+.booking-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 22px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.2);
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25, 16, 42, 0.95),
+      rgba(9, 7, 16, 0.98)
+    );
+
+  transition: 0.2s;
+}
+
+
+.booking-item:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(139, 92, 246, 0.45);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+.booking-icon {
+  width: 55px;
+  height: 55px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(124, 58, 237, 0.15);
+
+  border:
+    1px solid rgba(139, 92, 246, 0.25);
+
+  font-size: 25px;
+}
+
+
+.booking-details {
+  flex: 1;
+}
+
+
+.booking-details h2 {
+  margin: 0 0 12px;
+
+  color: #f5f3ff;
+
+  font-size: 20px;
+}
+
+
+.booking-info {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  color: #9189a2;
+
+  font-size: 13px;
+}
+
+
+.booking-price {
+  text-align: right;
+
+  min-width: 100px;
+}
+
+
+.booking-price span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #665e70;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+}
+
+
+.booking-price strong {
+  color: #a78bfa;
+
+  font-size: 20px;
+}
+
+
+/* EMPTY */
+
+.bookings-empty {
+  padding: 80px 20px;
+
+  text-align: center;
+
+  border:
+    1px dashed rgba(139, 92, 246, 0.25);
+
+  border-radius: 18px;
+
+  background:
+    rgba(20, 13, 32, 0.5);
+}
+
+
+.bookings-card {
+  width: min(450px, 100%);
+
+  margin: 80px auto 0;
+
+  padding: 45px 35px;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.25);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25, 16, 42, 0.98),
+      rgba(9, 7, 16, 0.98)
+    );
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+
+.booking-empty-icon {
+  font-size: 45px;
+
+  margin-bottom: 15px;
+}
+
+
+.bookings-empty h2,
+.bookings-card h2 {
+  margin: 0 0 10px;
+
+  color: #f5f3ff;
+}
+
+
+.bookings-empty p,
+.bookings-card p {
+  margin: 0 0 25px;
+
+  color: #817995;
+
+  font-size: 14px;
+}
+
+
+.booking-primary-button {
+  padding: 12px 22px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.booking-primary-button:hover {
+  box-shadow:
+    0 10px 30px rgba(124, 58, 237, 0.35);
+
+  transform: translateY(-1px);
+}
+
+
+.booking-back-button {
+  margin-top: 18px;
+
+  padding: 10px 18px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #9189a2;
+
+  cursor: pointer;
+}
+
+
+.booking-back-button:hover {
+  color: #c4b5fd;
+}
+
+
+.booking-back-button.bottom {
+  display: block;
+
+  margin: 30px auto 0;
+}
+
+
+.booking-loading {
+  color: #a78bfa;
+
+  font-size: 14px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+  .bookings-page {
+    width: calc(100% - 28px);
+
+    padding-top: 40px;
+  }
+
+  .bookings-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .bookings-header h1 {
+    font-size: 32px;
+  }
+
+  .booking-item {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+  .booking-details {
+    min-width: 200px;
+  }
+
+  .booking-price {
+    width: 100%;
+
+    text-align: left;
+
+    padding-top: 15px;
+
+    border-top:
+      1px solid rgba(255,255,255,0.06);
+  }
+
+  .booking-info {
+    flex-direction: column;
+
+    gap: 8px;
+  }
+}
+/* =========================================================
+   NAVBAR USER AREA
+========================================================= */
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+
+/* =========================================================
+   USER INFO
+========================================================= */
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 7px 12px 7px 7px;
+
+  border: 1px solid rgba(139, 92, 246, 0.15);
+
+  border-radius: 12px;
+
+  background:
+    rgba(124, 58, 237, 0.05);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.user-info:hover {
+  background:
+    rgba(124, 58, 237, 0.10);
+
+  border-color:
+    rgba(139, 92, 246, 0.3);
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a855f7,
+      #6d28d9
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 5px 18px rgba(124, 58, 237, 0.35);
+}
+
+
+/* =========================================================
+   USER NAME
+========================================================= */
+
+.user-details {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  white-space: nowrap;
+}
+
+.user-greeting {
+  color: #8f879e;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.user-details strong {
+  color: #e9e5f5;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.navbar-divider {
+  width: 1px;
+  height: 30px;
+
+  background:
+    rgba(139, 92, 246, 0.22);
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+========================================================= */
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  height: 42px;
+
+  padding: 0 18px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.55);
+
+  background:
+    rgba(124, 58, 237, 0.08);
+
+  color: #c4b5fd;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.logout-icon {
+  font-size: 17px;
+
+  line-height: 1;
+}
+
+.logout-button:hover {
+  transform: translateY(-1px);
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  border-color:
+    #8b5cf6;
+
+  color: white;
+
+  box-shadow:
+    0 8px 25px rgba(124, 58, 237, 0.35);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 11px 20px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.55);
+
+  background:
+    rgba(124, 58, 237, 0.08);
+
+  color: #c4b5fd;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition: 0.25s;
+}
+
+.login-button span {
+  font-size: 16px;
+}
+
+.login-button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d28d9
+    );
+
+  color: white;
+
+  border-color: #8b5cf6;
+
+  box-shadow:
+    0 8px 25px rgba(124, 58, 237, 0.35);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .navbar-user {
+    gap: 8px;
+  }
+
+  .user-info {
+    padding: 5px;
+    border: none;
+    background: transparent;
+  }
+
+  .user-info:hover {
+    background: transparent;
+  }
+
+  .user-details {
+    display: none;
+  }
+
+  .navbar-divider {
+    display: none;
+  }
+
+  .logout-button {
+    height: 38px;
+
+    padding: 0 13px;
+
+    font-size: 12px;
+  }
+
+  .logout-icon {
+    display: none;
+  }
+}
