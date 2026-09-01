@@ -1,19 +1,15 @@
 package com.ticketbooking.kafka;
-
 import com.ticketbooking.event.BookingCreatedEvent;
 import jakarta.annotation.PostConstruct;
-
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookingEventConsumer {
-
     @PostConstruct
     public void testConsumerBean() {
         System.out.println("🔥🔥🔥 BOOKING CONSUMER BEAN CREATED 🔥🔥🔥");
     }
-
     @KafkaListener(
             topics = "booking-created",
             groupId = "ticket-booking-group-new",
@@ -30,5 +26,4 @@ public class BookingEventConsumer {
         System.out.println("=================================");
     }
 }
-
 

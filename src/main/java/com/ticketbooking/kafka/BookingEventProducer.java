@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookingEventProducer {
     private final KafkaTemplate<String, BookingCreatedEvent> kafkaTemplate;
-    public BookingEventProducer(
-            KafkaTemplate<String, BookingCreatedEvent> kafkaTemplate) {
+    public BookingEventProducer(KafkaTemplate<String, BookingCreatedEvent> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
     public void sendBookingCreatedEvent(BookingCreatedEvent event) {
