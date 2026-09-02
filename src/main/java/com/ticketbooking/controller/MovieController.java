@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
+@CrossOrigin(origins = "https://glittery-empanada-015d82.netlify.app")
 public class MovieController {
     private final MovieService movieService;
     public MovieController(MovieService movieService) {
