@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
 
-const API_URL = "http://localhost:8081";
-
+const API_URL = import.meta.env.VITE_API_URL;
 function Home() {
 
   const [movies, setMovies] = useState([]);

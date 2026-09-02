@@ -1,32 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:8081";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Login() {
-
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-
   const handleLogin = async (e) => {
-
     e.preventDefault();
-
     setError("");
-
     if (!email.trim() || !password.trim()) {
       setError("Please enter email and password.");
       return;
     }
-
     try {
-
       setLoading(true);
 
       const response = await fetch(

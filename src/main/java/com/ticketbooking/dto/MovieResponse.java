@@ -11,9 +11,7 @@ public class MovieResponse {
     private double price;
     private String posterUrl;
 
-    public MovieResponse() {
-    }
-
+    public MovieResponse() {}
     public MovieResponse(
             Long id,
             String name,

@@ -25,7 +25,6 @@ public class MovieService {
 
     // Convert Movie entity -> MovieResponse
     private MovieResponse convertToResponse(Movie movie) {
-
         return new MovieResponse(
                 movie.getId(),
                 movie.getName(),
@@ -39,72 +38,43 @@ public class MovieService {
     }
 
     public List<MovieResponse> getAllMovies() {
-
         List<Movie> movies = movieRepository.findAll();
-
         List<MovieResponse> responses = new ArrayList<>();
-
-        for (Movie movie : movies) {
-            responses.add(convertToResponse(movie));
-        }
-
+        for (Movie movie : movies) responses.add(convertToResponse(movie));
         return responses;
     }
 
     public MovieResponse getMovieById(Long id) {
-
         Movie movie = movieRepository.findById(id).orElse(null);
-
-        if (movie == null) {
-            return null;
-        }
-
+        if (movie == null) return null;
         return convertToResponse(movie);
     }
 
     public List<MovieResponse> searchMovies(String name) {
-
-        List<Movie> movies =
-                movieRepository.findByNameContainingIgnoreCase(name);
-
+        List<Movie> movies = movieRepository.findByNameContainingIgnoreCase(name);
         List<MovieResponse> responses = new ArrayList<>();
-
         for (Movie movie : movies) {
             responses.add(convertToResponse(movie));
         }
-
         return responses;
     }
 
-    public List<MovieResponse> filterMoviesByPrice(
-            double minPrice,
-            double maxPrice) {
-
-        List<Movie> movies =
-                movieRepository.findByPriceBetween(minPrice, maxPrice);
-
+    public List<MovieResponse> filterMoviesByPrice(double minPrice, double maxPrice) {
+        List<Movie> movies = movieRepository.findByPriceBetween(minPrice, maxPrice);
         List<MovieResponse> responses = new ArrayList<>();
-
         for (Movie movie : movies) {
             responses.add(convertToResponse(movie));
         }
-
         return responses;
     }
 
     public List<MovieResponse> getMoviesSortedByPrice() {
-
         List<Movie> movies = movieRepository.findAll();
-
-        List<Movie> sortedMovies =
-                MovieSorter.sortByPrice(movies);
-
+        List<Movie> sortedMovies = MovieSorter.sortByPrice(movies);
         List<MovieResponse> responses = new ArrayList<>();
-
         for (Movie movie : sortedMovies) {
             responses.add(convertToResponse(movie));
         }
-
         return responses;
     }
 }

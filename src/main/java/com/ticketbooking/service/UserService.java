@@ -62,8 +62,7 @@ public class UserService {
                 .toList();
     }
 
-
-    public User getUserByEmail(String email) {return userRepository.findByEmail(email).orElse(null);}
+    public User getUserByEmail(String email) { return userRepository.findByEmail(email).orElse(null);}
 
     public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id).orElse(null);

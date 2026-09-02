@@ -20,19 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookingService {
-
     private final BookingRepository bookingRepository;
-
     private final MovieRepository movieRepository;
-
     private final BookingEventProducer bookingEventProducer;
-
     private final SeatManager seatManager;
-
     private final WaitingQueue waitingQueue;
-
     private final BookingStack bookingStack;
-
 
     public BookingService(
             BookingRepository bookingRepository,
@@ -50,7 +43,6 @@ public class BookingService {
     }
 
     // RESTORE BOOKINGS INTO STACK WHEN APPLICATION STARTS
-
     @PostConstruct
     public void loadBookingsIntoStack() {
         List<Booking> bookings = bookingRepository.findAllByOrderByIdAsc();
@@ -149,17 +141,14 @@ public class BookingService {
                         savedBooking.getMovieId(),
                         savedBooking.getSeats(),
                         savedBooking.getTotalPrice()
-                );
+        );
 
         bookingEventProducer.sendBookingCreatedEvent(event);
         System.out.println("Kafka booking event sent");
-        System.out.println("=================================");
         return savedBooking;
     }
 
-    // =========================================================
     // CANCEL BOOKING
-    // =========================================================
 
     @Transactional
     public void cancelBooking(Long bookingId, Long userId) {
@@ -167,29 +156,15 @@ public class BookingService {
         System.out.println("Booking ID: " + bookingId);
         System.out.println("User ID: " + userId);
 
-        // =====================================================
         // FIND BOOKING
-        // =====================================================
 
-        Booking booking =
-                bookingRepository
-                        .findById(bookingId)
-                        .orElse(null);
-
-
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
         if (booking == null) {
-
-            System.out.println(
-                    "Booking not found"
-            );
-
+            System.out.println("Booking not found");
             return;
         }
 
-
-        // =====================================================
         // CHECK USER OWNERSHIP
-        // =====================================================
 
         if (!booking.getUserId().equals(userId)) throw new BookingAccessDeniedException("You are not allowed to cancel this booking");
         Long movieId = booking.getMovieId();
@@ -199,9 +174,7 @@ public class BookingService {
             return;
         }
 
-        // =====================================================
         // RETURN SEATS
-        // =====================================================
 
         movie.setAvailableSeats(movie.getAvailableSeats() + booking.getSeats());
         movieRepository.save(movie);
@@ -234,21 +207,14 @@ public class BookingService {
         System.out.println("REQUESTED SEATS: " + nextRequest.getSeats());
 
 
-        // PROCESS WAITING USEr
+        // PROCESS WAITING USER
 
         if (movie.getAvailableSeats() >= nextRequest.getSeats()) {
-            /*
-             * Remove the request only when
-             * enough seats are available.
-             */
-
             waitingQueue.removeNext(movieId);
             System.out.println("Processing waiting request");
             System.out.println("User: " + nextRequest.getUserId());
 
-            // =================================================
             // CREATE BOOKING FOR WAITING USER
-            // =================================================
 
             bookTicket(
                     nextRequest.getUserId(),
@@ -259,3 +225,5 @@ public class BookingService {
         }
     }
 }
+
+

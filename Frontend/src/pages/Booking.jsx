@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const API_URL = "http://localhost:8081";
-
+const API_URL = import.meta.env.VITE_API_URL;
 function Booking() {
 
   const location = useLocation();
