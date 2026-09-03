@@ -1,23 +1,53 @@
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+
   const userData = localStorage.getItem("user");
 
   let user = null;
 
   try {
-    user = userData ? JSON.parse(userData) : null;
+    user = userData
+      ? JSON.parse(userData)
+      : null;
   } catch (error) {
     user = null;
   }
 
+
+  // ==============================
+  // LOGIN
+  // ==============================
+
   const handleLogin = () => {
     navigate("/login");
   };
+
+
+  // ==============================
+  // SIGNUP
+  // ==============================
+
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+
+
+  // ==============================
+  // ADMIN PORTAL
+  // ==============================
+
+  const handleAdminPortal = () => {
+    navigate("/admin");
+  };
+
+
+  // ==============================
+  // LOGOUT
+  // ==============================
 
   const handleLogout = () => {
 
@@ -29,14 +59,15 @@ function Navbar() {
 
 
   return (
+
     <nav className="navbar">
 
       <div className="navbar-container">
 
 
-        {/* =========================
+        {/* ==============================
             LOGO
-        ========================= */}
+        ============================== */}
 
         <div
           className="logo"
@@ -58,42 +89,56 @@ function Navbar() {
         </div>
 
 
-        {/* =========================
-            NAV LINKS
-        ========================= */}
+        {/* ==============================
+            NAVIGATION LINKS
+        ============================== */}
 
         <div className="nav-links">
+
+          {/* MOVIES */}
 
           <a
             href="/#movies"
             onClick={(e) => {
+
               e.preventDefault();
 
               navigate("/");
 
               setTimeout(() => {
+
                 document
                   .getElementById("movies")
                   ?.scrollIntoView({
                     behavior: "smooth"
                   });
+
               }, 100);
+
             }}
           >
             Movies
           </a>
 
 
+          {/* MY BOOKINGS */}
+
           <a
             href="/bookings"
             onClick={(e) => {
+
               e.preventDefault();
 
               if (token) {
+
                 navigate("/bookings");
+
               } else {
+
                 navigate("/login");
+
               }
+
             }}
           >
             My Bookings
@@ -102,9 +147,9 @@ function Navbar() {
         </div>
 
 
-        {/* =========================
-            USER / LOGIN
-        ========================= */}
+        {/* ==============================
+            USER SECTION
+        ============================== */}
 
         <div className="navbar-user">
 
@@ -112,13 +157,21 @@ function Navbar() {
 
             <>
 
+
+              {/* USER INFO */}
+
               <div className="user-info">
 
                 <div className="user-avatar">
+
                   {user.name
-                    ? user.name.charAt(0).toUpperCase()
+                    ? user.name
+                        .charAt(0)
+                        .toUpperCase()
                     : "U"}
+
                 </div>
+
 
                 <div className="user-details">
 
@@ -138,6 +191,27 @@ function Navbar() {
               <div className="navbar-divider"></div>
 
 
+              {/* ==============================
+                  ADMIN PORTAL
+                  ONLY ADMIN CAN SEE THIS
+              ============================== */}
+
+              {user.role === "ADMIN" && (
+
+                <button
+                  className="admin-button"
+                  onClick={handleAdminPortal}
+                >
+                  Admin Portal
+                </button>
+
+              )}
+
+
+              {/* ==============================
+                  LOGOUT
+              ============================== */}
+
               <button
                 className="logout-button"
                 onClick={handleLogout}
@@ -151,17 +225,39 @@ function Navbar() {
 
               </button>
 
+
             </>
 
           ) : (
 
-            <button
-              className="login-button"
-              onClick={handleLogin}
-            >
-              Login
-              <span>→</span>
-            </button>
+            /* ==============================
+               LOGGED OUT
+            ============================== */
+
+            <div className="auth-buttons">
+
+              <button
+                className="signup-button"
+                onClick={handleSignup}
+              >
+                Sign Up
+              </button>
+
+
+              <button
+                className="login-button"
+                onClick={handleLogin}
+              >
+
+                Login
+
+                <span>
+                  →
+                </span>
+
+              </button>
+
+            </div>
 
           )}
 
@@ -170,6 +266,7 @@ function Navbar() {
       </div>
 
     </nav>
+
   );
 }
 

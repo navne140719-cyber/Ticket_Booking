@@ -40,8 +40,8 @@ function Login() {
       const data = await response.json();
 
       console.log("LOGIN STATUS:", response.status);
-      console.log("LOGIN RESPONSE:", data);
-
+      console.log("LOGIN SUCCESS");
+      console.log("USER ROLE:", data.role);
 
       if (!response.ok) {
 
@@ -86,14 +86,14 @@ function Login() {
       const user = {
         id: data.id,
         name: data.name,
-        email: data.email
+        email: data.email,
+        role: data.role
       };
 
       localStorage.setItem(
         "user",
         JSON.stringify(user)
       );
-
 
       console.log("JWT SAVED");
       console.log("USER SAVED:", user);

@@ -26,7 +26,6 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
     public SecurityConfig(
             JwtAuthenticationFilter jwtAuthenticationFilter) {
 
@@ -68,46 +67,78 @@ public class SecurityConfig {
                 // Authorization rules
                 .authorizeHttpRequests(auth -> auth
 
-                        // CORS preflight
+                        // ==============================
+                        // CORS PREFLIGHT
+                        // ==============================
+
                         .requestMatchers(
                                 HttpMethod.OPTIONS,
                                 "/**"
                         ).permitAll()
 
-                        // Public endpoints
+
+                        // ==============================
+                        // PUBLIC USER ENDPOINTS
+                        // ==============================
+
+                        // Anyone can create an account
+                        // and login
                         .requestMatchers(
                                 "/users",
-                                "/users/login",
+                                "/users/login"
+                        ).permitAll()
+
+
+                        // ==============================
+                        // PUBLIC MOVIE READ ENDPOINTS
+                        // ==============================
+
+                        // Anyone can view movies
+                        .requestMatchers(
+                                HttpMethod.GET,
                                 "/movies",
                                 "/movies/**"
                         ).permitAll()
-
-                        // Everything else requires login
+                        // ADMIN MOVIE ENDPOINTS
+                        // Only ADMIN can add a movie
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/movies"
+                        ).hasRole("ADMIN")
+                        // Only ADMIN can update a movie
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/movies/**"
+                        ).hasRole("ADMIN")
+                        // Only ADMIN can delete a movie
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/movies/**"
+                        ).hasRole("ADMIN")
+                        // EVERYTHING ELSE
                         .anyRequest()
                         .authenticated()
                 )
 
-                // JWT filter
+                // ==============================
+                // JWT FILTER
+                // ==============================
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 );
-
 
         return http.build();
     }
 
 
     // ==============================
-    // CORS
+    // CORS CONFIGURATION
     // ==============================
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-
-        CorsConfiguration configuration =
-                new CorsConfiguration();
-
+        CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
                 List.of(
                         "http://localhost:5173",
@@ -115,7 +146,6 @@ public class SecurityConfig {
                         "https://glittery-empanada-015d82.netlify.app"
                 )
         );
-
         configuration.setAllowedMethods(
                 List.of(
                         "GET",
@@ -125,22 +155,18 @@ public class SecurityConfig {
                         "OPTIONS"
                 )
         );
-
         configuration.setAllowedHeaders(
                 List.of("*")
         );
-
         configuration.setAllowCredentials(true);
-
-
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
+
 
         source.registerCorsConfiguration(
                 "/**",
                 configuration
         );
-
         return source;
     }
 }

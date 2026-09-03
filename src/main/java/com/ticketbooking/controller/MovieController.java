@@ -23,6 +23,16 @@ public class MovieController {
     public List<MovieResponse> getAllMovies() {
         return movieService.getAllMovies();
     }
+    @PutMapping("/{id}")
+    public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
+        return movieService.updateMovie(id, movie);
+    }
+    @DeleteMapping("/{id}")
+    public String deleteMovie(@PathVariable Long id) {
+        boolean deleted = movieService.deleteMovie(id);
+        if (!deleted) return "Movie not found";
+        return "Movie deleted successfully";
+    }
     @GetMapping("/{id}")
     public MovieResponse getMovieById(@PathVariable Long id) {
         return movieService.getMovieById(id);

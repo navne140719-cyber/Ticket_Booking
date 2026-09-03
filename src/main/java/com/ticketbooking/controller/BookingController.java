@@ -32,17 +32,10 @@ public class BookingController {
     }
 
     @PostMapping
-    public Booking bookTicket(
-            @RequestBody BookingRequest request,
-            Authentication authentication) {
-
+    public Booking bookTicket(@RequestBody BookingRequest request, Authentication authentication) {
         String email = authentication.getName();
-
         User user = userRepository.findByEmail(email).orElse(null);
-
-        if (user == null) {
-            return null;
-        }
+        if (user == null) return null;
         return bookingService.bookTicket(
                 user.getId(),
                 request.getMovieId(),
@@ -50,7 +43,6 @@ public class BookingController {
                 false
         );
     }
-
 
     @DeleteMapping("/{bookingId}")
     public void cancelBooking(@PathVariable Long bookingId, Authentication authentication) {
@@ -63,3 +55,5 @@ public class BookingController {
         );
     }
 }
+
+

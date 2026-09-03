@@ -1,16 +1,25 @@
 package com.ticketbooking.dto;
 
 public class LoginResponse {
+
     private Long id;
     private String name;
     private String email;
     private String token;
+    private String role;
 
-    public LoginResponse(Long id, String name, String email, String token) {
+    public LoginResponse(
+            Long id,
+            String name,
+            String email,
+            String token,
+            String role) {
+
         this.id = id;
         this.name = name;
         this.email = email;
         this.token = token;
+        this.role = role;
     }
 
     public Long getId() {
@@ -27,5 +36,9 @@ public class LoginResponse {
 
     public String getToken() {
         return token;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

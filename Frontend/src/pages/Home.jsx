@@ -123,58 +123,35 @@ function Home() {
   // =====================================================
 
   const filterMovies = async () => {
-
     if (
       minPrice === "" &&
       maxPrice === ""
     ) {
-
       fetchMovies();
-
       return;
     }
-
-
-    const min =
-      minPrice === ""
-        ? 0
-        : minPrice;
-
-
+    const min = minPrice === "" ? 0 : minPrice;
     const max =
       maxPrice === ""
         ? 100000
         : maxPrice;
-
-
     try {
-
       setLoading(true);
-
-
       const response =
         await fetch(
           `${API_URL}/movies/filter?minPrice=${min}&maxPrice=${max}`
         );
 
-
       if (!response.ok) {
-
         throw new Error(
           "Filter failed"
         );
 
       }
 
-
-      const data =
-        await response.json();
-
-
+      const data = await response.json();
       setMovies(data);
-
     } catch (error) {
-
       console.error(
         "Filter error:",
         error

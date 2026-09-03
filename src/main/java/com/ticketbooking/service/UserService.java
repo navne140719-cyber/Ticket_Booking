@@ -27,7 +27,8 @@ public class UserService {
         User user = new User(
                 request.getName(),
                 request.getEmail(),
-                encodedPassword
+                encodedPassword,
+                "USER"
         );
         return userRepository.save(user);
     }
@@ -42,12 +43,14 @@ public class UserService {
                 user.getPassword()
         );
         if (!matched) return null;
-        String token = jwtService.generateToken(user.getEmail());
+
+        String token = jwtService.generateToken(user.getEmail(), user.getRole());
         return new LoginResponse(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                token
+                token,
+                user.getRole()
         );
     }
 

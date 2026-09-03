@@ -50,6 +50,25 @@ public class MovieService {
         return convertToResponse(movie);
     }
 
+    public Movie updateMovie(Long id, Movie updatedMovie) {
+        Movie existingMovie = movieRepository.findById(id).orElse(null);
+        if (existingMovie == null) return null;
+        existingMovie.setName(updatedMovie.getName());
+        existingMovie.setTheatre(updatedMovie.getTheatre());
+        existingMovie.setShowTime(updatedMovie.getShowTime());
+        existingMovie.setTotalSeats(updatedMovie.getTotalSeats());
+        existingMovie.setAvailableSeats(updatedMovie.getAvailableSeats());
+        existingMovie.setPrice(updatedMovie.getPrice());
+        existingMovie.setPosterUrl(updatedMovie.getPosterUrl());
+        return movieRepository.save(existingMovie);
+    }
+
+    public boolean deleteMovie(Long id) {
+        if (!movieRepository.existsById(id)) return false;
+        movieRepository.deleteById(id);
+        return true;
+    }
+
     public List<MovieResponse> searchMovies(String name) {
         List<Movie> movies = movieRepository.findByNameContainingIgnoreCase(name);
         List<MovieResponse> responses = new ArrayList<>();

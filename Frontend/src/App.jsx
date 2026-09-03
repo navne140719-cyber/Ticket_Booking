@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Booking from "./pages/Booking";
 import Bookings from "./pages/Bookings";
+import Signup from "./pages/Signup";
+import Admin from "./pages/Admin";
 
 import "./App.css";
 
@@ -12,10 +14,7 @@ function App() {
     <BrowserRouter>
 
       <Routes>
-
-        {/* =========================
-            HOME / MOVIES
-        ========================= */}
+        {/* HOME */}
 
         <Route
           path="/"
@@ -23,19 +22,27 @@ function App() {
         />
 
 
-        {/* =========================
-            LOGIN
-        ========================= */}
+        {/* LOGIN */}
 
         <Route
           path="/Login"
           element={<Login />}
         />
 
+            {/* Signup */}
 
-        {/* =========================
-            BOOK MOVIE
-        ========================= */}
+        <Route
+          path="/signup"
+          element={<Signup />}
+        />
+
+
+        <Route
+        path="/admin"
+        element={<Admin />}
+        />
+
+        {/* BOOK MOVIE */}
 
         <Route
           path="/booking"
@@ -43,9 +50,7 @@ function App() {
         />
 
 
-        {/* =========================
-            MY BOOKINGS
-        ========================= */}
+        {/* MY BOOKINGS */}
 
         <Route
           path="/bookings"
@@ -53,9 +58,7 @@ function App() {
         />
 
 
-        {/* =========================
-            FALLBACK
-        ========================= */}
+        {/* FALLBACK */}
 
         <Route
           path="*"

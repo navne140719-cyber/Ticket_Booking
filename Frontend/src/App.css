@@ -2633,3 +2633,814 @@ main {
     display: none;
   }
 }
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.signup-button {
+  background: transparent;
+  color: #c4a7ff;
+  border: 1px solid #7c3aed;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signup-button:hover {
+  background: #7c3aed;
+  color: white;
+}
+
+/* =========================
+   SIGNUP PAGE
+========================= */
+
+.signup-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 40px;
+  background: rgba(20, 12, 35, 0.95);
+  border: 1px solid #38205f;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.signup-card h2 {
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.signup-field label {
+  color: #c4b5fd;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.signup-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  background: #0d0717;
+  color: white;
+  border: 1px solid #39215d;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.signup-field input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+
+.signup-button-main {
+  width: 100%;
+  padding: 14px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 10px;
+  background: #7c3aed;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.signup-button-main:hover {
+  background: #8b5cf6;
+  transform: translateY(-1px);
+}
+
+.signup-error {
+  margin: 0;
+  color: #f87171;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup-success {
+  margin: 0;
+  color: #4ade80;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup-login-text {
+  margin: 25px 0 0;
+  text-align: center;
+  color: #a8a0b8;
+  font-size: 14px;
+}
+
+.signup-login-text a {
+  color: #a78bfa;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-login-text a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   NAVBAR SIGNUP BUTTON
+========================= */
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.signup-button {
+  background: transparent;
+  color: #c4a7ff;
+  border: 1px solid #7c3aed;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signup-button:hover {
+  background: #7c3aed;
+  color: white;
+}
+/* ==============================
+   ADMIN PORTAL BUTTON
+============================== */
+
+.admin-button {
+  border: none;
+  background: #6c5ce7;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* =========================================
+   ADMIN PORTAL
+========================================= */
+
+.admin-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 30px 80px;
+}
+
+
+/* Header */
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.admin-label {
+  color: #8b7cf6;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.admin-description {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 15px;
+}
+
+
+/* Movie counter */
+
+.movie-count {
+  min-width: 90px;
+  height: 90px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #292633;
+  border-radius: 16px;
+
+  background: #111016;
+}
+
+.movie-count span {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.movie-count small {
+  color: #999;
+  margin-top: 3px;
+}
+
+
+/* Sections */
+
+.admin-section {
+  background: #111016;
+
+  border: 1px solid #292633;
+  border-radius: 18px;
+
+  padding: 28px;
+
+  margin-bottom: 30px;
+}
+
+.section-header {
+  margin-bottom: 25px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.section-header p {
+  margin-top: 7px;
+  color: #999;
+  font-size: 14px;
+}
+
+
+/* Form */
+
+.movie-form {
+  width: 100%;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.admin-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ccc;
+
+  margin-bottom: 8px;
+}
+
+.admin-form-group input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  border: 1px solid #302c3b;
+  border-radius: 9px;
+
+  background: #09080d;
+  color: white;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: border 0.2s ease;
+}
+
+.admin-form-group input:focus {
+  border-color: #7567e8;
+}
+
+.admin-form-group input::placeholder {
+  color: #666;
+}
+
+
+/* Add button */
+
+.add-movie-button {
+  border: none;
+
+  background: #6c5ce7;
+  color: white;
+
+  padding: 12px 20px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.add-movie-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+
+/* Movie grid */
+
+.admin-movie-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+
+/* Movie card */
+
+.admin-movie-card {
+  overflow: hidden;
+
+  border: 1px solid #292633;
+  border-radius: 15px;
+
+  background: #0b0a0f;
+
+  transition: transform 0.2s ease,
+              border 0.2s ease;
+}
+
+.admin-movie-card:hover {
+  transform: translateY(-4px);
+  border-color: #48415c;
+}
+
+
+/* Poster */
+
+.admin-poster {
+  width: 100%;
+  height: 300px;
+
+  background: #16141c;
+
+  overflow: hidden;
+}
+
+.admin-poster img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+.no-poster {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 50px;
+}
+
+
+/* Movie content */
+
+.admin-movie-content {
+  padding: 18px;
+}
+
+.admin-movie-content h3 {
+  margin: 0 0 10px;
+
+  font-size: 19px;
+}
+
+.movie-theatre,
+.movie-time {
+  margin: 6px 0;
+
+  color: #aaa;
+
+  font-size: 13px;
+}
+
+
+/* Stats */
+
+.movie-stats {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+.movie-stats div {
+  padding: 10px 6px;
+
+  background: #15131b;
+
+  border-radius: 8px;
+
+  text-align: center;
+}
+
+.movie-stats span {
+  display: block;
+
+  color: #777;
+
+  font-size: 11px;
+
+  margin-bottom: 4px;
+}
+
+.movie-stats strong {
+  font-size: 14px;
+}
+
+
+/* Actions */
+
+.movie-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+.edit-movie-button,
+.delete-movie-button {
+  padding: 9px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.edit-movie-button {
+  background: transparent;
+
+  color: #aaa;
+
+  border: 1px solid #35313f;
+}
+
+.edit-movie-button:hover {
+  background: #191721;
+  color: white;
+}
+
+.delete-movie-button {
+  background: transparent;
+
+  color: #ff6b6b;
+
+  border: 1px solid #4b2828;
+}
+
+.delete-movie-button:hover {
+  background: #241416;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+  .admin-movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .admin-page {
+    padding: 30px 15px 60px;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+  }
+
+  .admin-header h1 {
+    font-size: 28px;
+  }
+
+  .movie-count {
+    min-width: 70px;
+    height: 70px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .admin-movie-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+.movie-form-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/* =========================
+   BOOKING MODAL
+========================= */
+
+.booking-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.booking-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #111016;
+  border: 1px solid #302c3b;
+  border-radius: 18px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.booking-close-button {
+  position: absolute;
+  top: 15px;
+  right: 17px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.booking-close-button:hover {
+  color: white;
+}
+
+.booking-modal-label {
+  margin: 0 0 7px;
+  color: #8b7cf6;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.booking-modal h2 {
+  margin: 0;
+  padding-right: 35px;
+  font-size: 26px;
+}
+
+.booking-movie-details {
+  margin-top: 18px;
+  padding: 15px;
+  background: #09080d;
+  border: 1px solid #292633;
+  border-radius: 10px;
+}
+
+.booking-movie-details p {
+  margin: 7px 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.booking-movie-details p:first-child {
+  margin-top: 0;
+}
+
+.booking-movie-details p:last-child {
+  margin-bottom: 0;
+}
+
+.seat-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.seat-selection > span {
+  color: #ccc;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.seat-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.seat-controls button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #3a3547;
+  border-radius: 8px;
+  background: #191721;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.seat-controls button:hover:not(:disabled) {
+  background: #252131;
+}
+
+.seat-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.seat-controls strong {
+  min-width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.booking-available {
+  margin: 12px 0 0;
+  color: #777;
+  font-size: 12px;
+  text-align: right;
+}
+
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #292633;
+}
+
+.booking-total span {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.booking-total strong {
+  font-size: 24px;
+}
+
+.booking-success {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #10251a;
+  border: 1px solid #235936;
+  color: #6ee7a0;
+  font-size: 13px;
+  text-align: center;
+}
+
+.booking-error {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #281416;
+  border: 1px solid #5a292d;
+  color: #ff8585;
+  font-size: 13px;
+  text-align: center;
+}
+
+.confirm-booking-button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 13px;
+  border: none;
+  border-radius: 9px;
+  background: #6c5ce7;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-booking-button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.confirm-booking-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-booking-button {
+  width: 100%;
+  margin-top: 9px;
+  padding: 11px;
+  border: 1px solid #35313f;
+  border-radius: 9px;
+  background: transparent;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cancel-booking-button:hover:not(:disabled) {
+  background: #191721;
+  color: white;
+}
+
+@media (max-width: 500px) {
+
+  .booking-modal {
+    padding: 25px 20px;
+  }
+
+  .seat-selection {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .booking-available {
+    text-align: left;
+  }
+}
+
+

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -32,11 +33,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         System.out.println("=================================");
-        System.out.println("REQUEST = " + request.getMethod() + " " + request.getRequestURI());
-        System.out.println("AUTH HEADER = " + authHeader);
+        System.out.println(
+                "REQUEST = "
+                        + request.getMethod()
+                        + " "
+                        + request.getRequestURI()
+        );
 
-        // No Authorization header
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        // Don't print the actual JWT
+        System.out.println(
+                "AUTH HEADER PRESENT = "
+                        + (authHeader != null)
+        );
+
+
+        // ==============================
+        // NO JWT
+        // ==============================
+
+        if (authHeader == null ||
+                !authHeader.startsWith("Bearer ")) {
 
             System.out.println("NO JWT FOUND");
 
@@ -44,44 +60,99 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        // Remove "Bearer "
+
+        // ==============================
+        // GET TOKEN
+        // ==============================
+
         String token = authHeader.substring(7);
 
         System.out.println("JWT FOUND");
 
+
         try {
 
-            // Extract email from JWT
-            String email = jwtService.extractEmail(token);
+            // ==============================
+            // EXTRACT EMAIL
+            // ==============================
 
-            System.out.println("EMAIL FROM JWT = " + email);
+            String email =
+                    jwtService.extractEmail(token);
 
-            // Authenticate only if there isn't already authentication
+            // ==============================
+            // EXTRACT ROLE
+            // ==============================
+
+            String role =
+                    jwtService.extractRole(token);
+
+            System.out.println(
+                    "EMAIL FROM JWT = " + email
+            );
+
+            System.out.println(
+                    "ROLE FROM JWT = " + role
+            );
+
+
+            // ==============================
+            // AUTHENTICATE USER
+            // ==============================
+
             if (email != null &&
                     SecurityContextHolder
                             .getContext()
                             .getAuthentication() == null) {
 
-                UsernamePasswordAuthenticationToken authentication =
+                /*
+                 * Spring Security expects authorities
+                 * in the form:
+                 *
+                 * ROLE_USER
+                 * ROLE_ADMIN
+                 */
+
+                String authority =
+                        "ROLE_" + role;
+
+                UsernamePasswordAuthenticationToken
+                        authentication =
                         new UsernamePasswordAuthenticationToken(
                                 email,
                                 null,
-                                Collections.emptyList()
+                                Collections.singletonList(
+                                        new SimpleGrantedAuthority(
+                                                authority
+                                        )
+                                )
                         );
 
                 SecurityContextHolder
                         .getContext()
-                        .setAuthentication(authentication);
+                        .setAuthentication(
+                                authentication
+                        );
 
-                System.out.println("USER AUTHENTICATED = " + email);
+                System.out.println(
+                        "USER AUTHENTICATED = "
+                                + email
+                );
+
+                System.out.println(
+                        "AUTHORITY = "
+                                + authority
+                );
             }
 
         } catch (Exception e) {
 
-            System.out.println("JWT VALIDATION FAILED");
-            System.out.println("REASON = " + e.getMessage());
+            System.out.println(
+                    "JWT VALIDATION FAILED"
+            );
+            System.out.println(
+                    "REASON = " + e.getMessage()
+            );
 
-            // Remove invalid authentication if any
             SecurityContextHolder
                     .getContext()
                     .setAuthentication(null);
