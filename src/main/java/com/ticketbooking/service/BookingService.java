@@ -14,9 +14,11 @@ import com.ticketbooking.algorithm.SeatManager;
 import com.ticketbooking.algorithm.WaitingQueue;
 import com.ticketbooking.algorithm.WaitingRequest;
 import com.ticketbooking.algorithm.BookingStack;
+import com.ticketbooking.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.ticketbooking.entity.User;
 
 @Service
 public class BookingService {
@@ -26,6 +28,7 @@ public class BookingService {
     private final SeatManager seatManager;
     private final WaitingQueue waitingQueue;
     private final BookingStack bookingStack;
+    private final UserRepository userRepository;
 
     public BookingService(
             BookingRepository bookingRepository,
@@ -33,13 +36,15 @@ public class BookingService {
             BookingEventProducer bookingEventProducer,
             SeatManager seatManager,
             WaitingQueue waitingQueue,
-            BookingStack bookingStack) {
+            BookingStack bookingStack,
+            UserRepository userRepository) {
         this.bookingRepository = bookingRepository;
         this.movieRepository = movieRepository;
         this.bookingEventProducer = bookingEventProducer;
         this.seatManager = seatManager;
         this.waitingQueue = waitingQueue;
         this.bookingStack = bookingStack;
+        this.userRepository = userRepository;
     }
 
     // RESTORE BOOKINGS INTO STACK WHEN APPLICATION STARTS
@@ -133,16 +138,20 @@ public class BookingService {
 
         bookingStack.push(savedBooking);
 
+        // GET USER DETAILS
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
         // CREATE KAFKA EVENT
-
         BookingCreatedEvent event = new BookingCreatedEvent(
-                        savedBooking.getId(),
-                        savedBooking.getUserId(),
-                        savedBooking.getMovieId(),
-                        savedBooking.getSeats(),
-                        savedBooking.getTotalPrice()
+                savedBooking.getId(),
+                savedBooking.getUserId(),
+                user.getName(),
+                user.getEmail(),
+                savedBooking.getMovieId(),
+                movie.getName(),
+                savedBooking.getSeats(),
+                savedBooking.getTotalPrice()
         );
-
         bookingEventProducer.sendBookingCreatedEvent(event);
         System.out.println("Kafka booking event sent");
         return savedBooking;
