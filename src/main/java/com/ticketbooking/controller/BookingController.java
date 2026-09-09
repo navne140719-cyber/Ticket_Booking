@@ -33,6 +33,8 @@ public class BookingController {
 
     @PostMapping
     public Booking bookTicket(@RequestBody BookingRequest request, Authentication authentication) {
+        System.out.println("🔥 BOOKING CONTROLLER REACHED");
+        System.out.println("AUTHENTICATION = " + authentication);
         String email = authentication.getName();
         User user = userRepository.findByEmail(email).orElse(null);
         if (user == null) return null;
