@@ -67,54 +67,57 @@ public class SecurityConfig {
                 // Authorization rules
                 .authorizeHttpRequests(auth -> auth
 
-                        // ==============================
                         // CORS PREFLIGHT
-                        // ==============================
-
                         .requestMatchers(
                                 HttpMethod.OPTIONS,
                                 "/**"
                         ).permitAll()
 
-
-                        // ==============================
                         // PUBLIC USER ENDPOINTS
-                        // ==============================
-
-                        // Anyone can create an account
-                        // and login
                         .requestMatchers(
                                 "/users",
                                 "/users/login"
                         ).permitAll()
 
-
-                        // ==============================
-                        // PUBLIC MOVIE READ ENDPOINTS
-                        // ==============================
-
-                        // Anyone can view movies
+                        // PUBLIC MOVIE READ
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/movies",
                                 "/movies/**"
                         ).permitAll()
+
                         // ADMIN MOVIE ENDPOINTS
-                        // Only ADMIN can add a movie
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/movies"
                         ).hasRole("ADMIN")
-                        // Only ADMIN can update a movie
+
                         .requestMatchers(
                                 HttpMethod.PUT,
                                 "/movies/**"
                         ).hasRole("ADMIN")
-                        // Only ADMIN can delete a movie
+
                         .requestMatchers(
                                 HttpMethod.DELETE,
                                 "/movies/**"
                         ).hasRole("ADMIN")
+
+                        // BOOKING ENDPOINTS
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/bookings"
+                        ).authenticated()
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/bookings"
+                        ).authenticated()
+
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/bookings/**"
+                        ).authenticated()
+
                         // EVERYTHING ELSE
                         .anyRequest()
                         .authenticated()
@@ -139,11 +142,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(
+        configuration.setAllowedOriginPatterns(
                 List.of(
                         "http://localhost:5173",
                         "http://localhost:5174",
-                        "https://glittery-empanada-015d82.netlify.app"
+                        "https://glittery-empanada-015d82.netlify.app",
+                        "https://*.netlify.app"
                 )
         );
         configuration.setAllowedMethods(
@@ -161,7 +165,6 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
-
 
         source.registerCorsConfiguration(
                 "/**",

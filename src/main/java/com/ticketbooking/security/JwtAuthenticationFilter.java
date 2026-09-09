@@ -40,17 +40,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         + request.getRequestURI()
         );
 
-        // Don't print the actual JWT
         System.out.println(
                 "AUTH HEADER PRESENT = "
                         + (authHeader != null)
         );
 
-
-        // ==============================
-        // NO JWT
-        // ==============================
-
+        // No JWT
         if (authHeader == null ||
                 !authHeader.startsWith("Bearer ")) {
 
@@ -60,31 +55,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-
-        // ==============================
-        // GET TOKEN
-        // ==============================
-
         String token = authHeader.substring(7);
 
         System.out.println("JWT FOUND");
 
-
         try {
 
-            // ==============================
-            // EXTRACT EMAIL
-            // ==============================
+            // Validate JWT first
+            if (!jwtService.isTokenValid(token)) {
 
-            String email =
-                    jwtService.extractEmail(token);
+                System.out.println("JWT IS INVALID");
 
-            // ==============================
-            // EXTRACT ROLE
-            // ==============================
+                SecurityContextHolder
+                        .getContext()
+                        .setAuthentication(null);
 
-            String role =
-                    jwtService.extractRole(token);
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            String email = jwtService.extractEmail(token);
+            String role = jwtService.extractRole(token);
 
             System.out.println(
                     "EMAIL FROM JWT = " + email
@@ -94,29 +85,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     "ROLE FROM JWT = " + role
             );
 
-
-            // ==============================
-            // AUTHENTICATE USER
-            // ==============================
-
             if (email != null &&
+                    !email.isBlank() &&
                     SecurityContextHolder
                             .getContext()
                             .getAuthentication() == null) {
 
-                /*
-                 * Spring Security expects authorities
-                 * in the form:
-                 *
-                 * ROLE_USER
-                 * ROLE_ADMIN
-                 */
+                if (role == null || role.isBlank()) {
+                    role = "USER";
+                }
 
-                String authority =
-                        "ROLE_" + role;
+                String authority;
 
-                UsernamePasswordAuthenticationToken
-                        authentication =
+                if (role.startsWith("ROLE_")) {
+                    authority = role;
+                } else {
+                    authority = "ROLE_" + role;
+                }
+
+                UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 email,
                                 null,
@@ -129,26 +116,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder
                         .getContext()
-                        .setAuthentication(
-                                authentication
-                        );
+                        .setAuthentication(authentication);
 
                 System.out.println(
-                        "USER AUTHENTICATED = "
-                                + email
+                        "USER AUTHENTICATED = " + email
                 );
 
                 System.out.println(
-                        "AUTHORITY = "
-                                + authority
+                        "AUTHORITY = " + authority
                 );
             }
 
         } catch (Exception e) {
 
-            System.out.println(
-                    "JWT VALIDATION FAILED"
-            );
+            System.out.println("JWT VALIDATION FAILED");
             System.out.println(
                     "REASON = " + e.getMessage()
             );
