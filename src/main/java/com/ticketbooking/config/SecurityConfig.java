@@ -1,4 +1,6 @@
+
 package com.ticketbooking.config;
+
 import com.ticketbooking.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,148 +16,74 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.List;
 
 @Configuration
 public class SecurityConfig {
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-    // PASSWORD ENCODER
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ==============================
-    // SECURITY CONFIGURATION
-    // ==============================
-
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http)
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
 
         http
-
-                // ==============================
-                // DISABLE CSRF
-                // ==============================
-
                 .csrf(csrf -> csrf.disable())
 
-                // ==============================
-                // ENABLE CORS
-                // ==============================
-
-                .cors(cors -> cors.configurationSource(
-                        corsConfigurationSource()
-                ))
-
-                // ==============================
-                // JWT APPLICATION IS STATELESS
-                // ==============================
+                .cors(cors ->
+                        cors.configurationSource(corsConfigurationSource())
+                )
 
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS
-                        )
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-
-                // ==============================
-                // ACCESS DENIED HANDLER
-                // ==============================
 
                 .exceptionHandling(exception ->
-                        exception.accessDeniedHandler(
-                                accessDeniedHandler()
-                        )
+                        exception.accessDeniedHandler(accessDeniedHandler())
                 )
 
-                // ==============================
-                // AUTHORIZATION
-                // ==============================
-
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/error").permitAll()
 
-                        // ==============================
-                        // CORS PREFLIGHT
-                        // ==============================
+                        // Public user endpoints
+                        .requestMatchers("/users", "/users/login").permitAll()
 
-                        .requestMatchers(
-                                HttpMethod.OPTIONS,
-                                "/**"
-                        ).permitAll()
-
-                        // ==============================
-                        // PUBLIC USER ENDPOINTS
-                        // ==============================
-
-                        .requestMatchers(
-                                "/users",
-                                "/users/login"
-                        ).permitAll()
-
-                        // ==============================
-                        // PUBLIC MOVIE READ
-                        // ==============================
-
+                        // Public movie read endpoints
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/movies",
                                 "/movies/**"
                         ).permitAll()
 
-                        // ==============================
-                        // ADMIN MOVIE ENDPOINTS
-                        // ==============================
+                        // Admin movie endpoints
+                        .requestMatchers(HttpMethod.POST, "/movies").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/movies/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/movies/**").hasRole("ADMIN")
 
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/movies"
-                        ).hasRole("ADMIN")
+                        // Seat hold endpoints
+                        .requestMatchers(HttpMethod.POST, "/seat-holds").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/seat-holds/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/seat-holds/**").authenticated()
 
-                        .requestMatchers(
-                                HttpMethod.PUT,
-                                "/movies/**"
-                        ).hasRole("ADMIN")
+                        // Booking endpoints
+                        .requestMatchers(HttpMethod.GET, "/bookings").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/bookings").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/bookings/**").authenticated()
 
-                        .requestMatchers(
-                                HttpMethod.DELETE,
-                                "/movies/**"
-                        ).hasRole("ADMIN")
-
-                        // ==============================
-                        // BOOKING ENDPOINTS
-                        // ==============================
-
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/bookings"
-                        ).authenticated()
-
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/bookings"
-                        ).authenticated()
-
-                        .requestMatchers(
-                                HttpMethod.DELETE,
-                                "/bookings/**"
-                        ).authenticated()
-
-                        // ==============================
-                        // EVERYTHING ELSE
-                        // ==============================
-
-                        .anyRequest()
-                        .authenticated()
+                        // Keep other endpoints protected
+                        .anyRequest().authenticated()
                 )
-
-                // ==============================
-                // JWT FILTER
-                // ==============================
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,
@@ -165,26 +93,15 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ==============================
-    // ACCESS DENIED HANDLER
-    // ==============================
-
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
-
         return (request, response, exception) -> {
-
             System.out.println("==============================");
-            System.out.println("🔥 ACCESS DENIED");
-            System.out.println(
-                    "METHOD = " + request.getMethod()
-            );
-            System.out.println(
-                    "URI = " + request.getRequestURI()
-            );
-            System.out.println(
-                    "REASON = " + exception.getMessage()
-            );
+            System.out.println("ACCESS DENIED");
+            System.out.println("METHOD = " + request.getMethod());
+            System.out.println("URI = " + request.getRequestURI());
+            System.out.println("REASON = " + exception.getMessage());
+            System.out.println("==============================");
 
             response.sendError(
                     HttpStatus.FORBIDDEN.value(),
@@ -193,48 +110,27 @@ public class SecurityConfig {
         };
     }
 
-    // ==============================
-    // CORS CONFIGURATION
-    // ==============================
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        CorsConfiguration configuration =
-                new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of(
+                "https://glittery-empanada-015d82.netlify.app",
+                "http://localhost:5173",
+                "http://localhost:5174"
+        ));
 
-        configuration.setAllowedOriginPatterns(
-                List.of(
-                        "http://localhost:5173",
-                        "http://localhost:5174",
-                        "https://glittery-empanada-015d82.netlify.app",
-                        "https://*.netlify.app"
-                )
-        );
+        configuration.setAllowedMethods(List.of(
+                "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"
+        ));
 
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "DELETE",
-                        "OPTIONS"
-                )
-        );
-
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
-
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }

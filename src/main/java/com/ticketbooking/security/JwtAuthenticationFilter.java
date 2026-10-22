@@ -1,3 +1,4 @@
+
 package com.ticketbooking.security;
 
 import jakarta.servlet.FilterChain;
@@ -30,8 +31,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
-        String authHeader = request.getHeader("Authorization");
-
         System.out.println("=================================");
         System.out.println(
                 "REQUEST = "
@@ -40,9 +39,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         + request.getRequestURI()
         );
 
+        // Allow browser CORS preflight requests without JWT processing
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String authHeader = request.getHeader("Authorization");
+
         System.out.println(
-                "AUTH HEADER PRESENT = "
-                        + (authHeader != null)
+                "AUTH HEADER PRESENT = " + (authHeader != null)
         );
 
         // No JWT
@@ -77,13 +83,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String email = jwtService.extractEmail(token);
             String role = jwtService.extractRole(token);
 
-            System.out.println(
-                    "EMAIL FROM JWT = " + email
-            );
-
-            System.out.println(
-                    "ROLE FROM JWT = " + role
-            );
+            System.out.println("EMAIL FROM JWT = " + email);
+            System.out.println("ROLE FROM JWT = " + role);
 
             if (email != null &&
                     !email.isBlank() &&
@@ -108,9 +109,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                 email,
                                 null,
                                 Collections.singletonList(
-                                        new SimpleGrantedAuthority(
-                                                authority
-                                        )
+                                        new SimpleGrantedAuthority(authority)
                                 )
                         );
 
@@ -118,21 +117,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         .getContext()
                         .setAuthentication(authentication);
 
-                System.out.println(
-                        "USER AUTHENTICATED = " + email
-                );
-
-                System.out.println(
-                        "AUTHORITY = " + authority
-                );
+                System.out.println("USER AUTHENTICATED = " + email);
+                System.out.println("AUTHORITY = " + authority);
             }
 
         } catch (Exception e) {
 
             System.out.println("JWT VALIDATION FAILED");
-            System.out.println(
-                    "REASON = " + e.getMessage()
-            );
+            System.out.println("REASON = " + e.getMessage());
 
             SecurityContextHolder
                     .getContext()
